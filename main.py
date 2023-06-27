@@ -24,6 +24,7 @@ from reportlab.lib.units import mm
 from reportlab.pdfgen import canvas
 from reportlab.platypus import Paragraph, Spacer, Image, PageBreak, Preformatted, PageTemplate, BaseDocTemplate, Frame
 from telethon.sync import TelegramClient
+from slack_sdk.webhook import WebhookClient
 
 # import stylecloud  # disabled while I fix the wordcloud
 
@@ -854,3 +855,9 @@ except ValueError as e:
 printC('\nProcess completed', Fore.GREEN)
 client.disconnect()  # Disconnect the Telethon client from the Telegram server
 
+url = "https://hooks.slack.com/services/XXXXXXXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX"
+webhook = WebhookClient(url)
+
+response = webhook.send(text="Telegram scanning = completed")
+assert response.status_code == 200
+assert response.body == "ok"
