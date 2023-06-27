@@ -1,6 +1,7 @@
 import datetime
 import os
 import pickle
+import json
 import re
 import sys
 import textwrap
@@ -24,7 +25,6 @@ from reportlab.lib.units import mm
 from reportlab.pdfgen import canvas
 from reportlab.platypus import Paragraph, Spacer, Image, PageBreak, Preformatted, PageTemplate, BaseDocTemplate, Frame
 from telethon.sync import TelegramClient
-from slack_sdk.webhook import WebhookClient
 
 # import stylecloud  # disabled while I fix the wordcloud
 
@@ -794,6 +794,7 @@ try:
 
     filename_html = os.path.join(output_folder, f'all_results__{now}.html')
     filename_csv = os.path.join(output_folder, f'all_results__{now}.csv')
+    filename_json = os.path.join(output_folder, f'all_results__{now}.json')
     filename_pickle = os.path.join(output_folder, f'all_results__{now}.pickle')
     filename_png = os.path.join(output_folder, f'keyword_frequency__{now}.png')
 
@@ -818,6 +819,15 @@ try:
             printC(f"Saved {filename_csv}", Fore.GREEN)
         except IOError as e:
             print(f'Error making CSV: {e}')
+            traceback.print_exc()
+
+        # Export to a JSON
+        try:
+            printC('Exporting to json...', Fore.YELLOW)
+            all_results.to_json(filename_json, orient='records', force_ascii=False)
+            printC(f"Saved {filename_json}", Fore.GREEN)
+        except IOError as e:
+            print(f'Error making JSON: {e}')
             traceback.print_exc()
 
         # Export to pickle file -- ERROR currently, disabled for now. Grab data from CSV for further processing instead
@@ -854,10 +864,3 @@ except ValueError as e:
 
 printC('\nProcess completed', Fore.GREEN)
 client.disconnect()  # Disconnect the Telethon client from the Telegram server
-
-url = "https://hooks.slack.com/services/XXXXXXXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX"
-webhook = WebhookClient(url)
-
-response = webhook.send(text="Telegram scanning = completed")
-assert response.status_code == 200
-assert response.body == "ok"
