@@ -11,7 +11,8 @@ In short, this tool allows you to search all the channels you follow with a list
 I've just been modifying this for my own specific usage so sorry if it sucks. I think its a neat tool for CTI.
 
 ###### Screenshot of tool in action
-[put something here]
+[![ss](https://i.imgur.com/xxEKkvl.png "Example result exploring hate speech during the Russian full-scale invasion of Ukraine")](https://i.imgur.com/xxEKkvl.png "asdffa")
+
 
 
 ##### Key Features
