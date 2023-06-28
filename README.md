@@ -1,5 +1,7 @@
 # Telegram Loot
 
+tl;dr - this script is a Telegram wizard 🧙🏽‍♂️ that hunts for intel.
+
 A fork of Telegram Trends by Tom Jarvis.
 
 This is an analysis tool to explore and monitor sus cybercrime channels/groups on the Telegram chat platform. Please use this tool with caution as it does not have content moderation or filtering. You are responsible for the content that may be exported.
