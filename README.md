@@ -1,5 +1,5 @@
-# Telegram Keyword Trends
-An analysis tool to explore the emergence of hatespeech, disinformation, and narratives of interest on the Telegram chat platform. Please use this tool with caution as it does not have content moderation or filtering. You are responsible for the content that may be exported.
+# Telegram Loot
+An analysis tool to explore and monitor sus cybercrime channels/groups on the Telegram chat platform. Please use this tool with caution as it does not have content moderation or filtering. You are responsible for the content that may be exported.
 
 In short, this tool allows you to search all the channels you follow with a list of keywords/phrases and returns all matching results in various formats with graph visualisations. It also optionally downloads the media and thus can be used as a media search engine (currently some bugs with this feature - do not use as exhaustive media search tool).
 
@@ -22,23 +22,11 @@ In short, this tool allows you to search all the channels you follow with a list
 
 
 
-This script searches messages containing specified search terms in Telegram channels the user is a member of. It exports the search results in HTML and CSV formats, generates a report, and plots the message count per day.
+This script searches messages containing specified search terms in Telegram channels the user is a member of. It exports the search results in HTML/JSON/CSV formats, generates a report, and plots the message count per day.
 
 It is designed to monitor trends of search terms in much the same way that Google Trends does. This can be very useful for identifying the emergence of hatespeech or discussion/narratives following certain events.
 
 This current version does not do any significant adjustment to the data, for example, the graph does not display incidence of terms adjusted to the incidence of all messages. This means further analysis should be conducted to ensure that a sharp spike in terms is not confounded by a sharp spike in general activity. For this reason, the graph output should be treated as indicative of need for further research and statistical analysis.
-
-###### Example result exploring hate speech during the Russian full-scale invasion of Ukraine
-[![Example result exploring hate speech during the Russian full-scale invasion of Ukraine](https://user-images.githubusercontent.com/118008765/230750727-0a4f74db-9ab2-41df-b49a-c1ec2c785753.png "Example result exploring hate speech during the Russian full-scale invasion of Ukraine")](https://user-images.githubusercontent.com/118008765/230750727-0a4f74db-9ab2-41df-b49a-c1ec2c785753.png "Example result exploring hate speech during the Russian full-scale invasion of Ukraine")
-*This image is an example result showing how the channels under investigation saw a surge in usage of specific terms.*
-
-###### Example of the report generated 
-[![Example of the report generated](https://user-images.githubusercontent.com/118008765/231264336-74be2122-dcec-4146-ac51-a5062a79e436.png "Example of the report generated")](https://user-images.githubusercontent.com/118008765/231264336-74be2122-dcec-4146-ac51-a5062a79e436.png "Example of the report generated")
-*This image is an example result from the report, a PDF document that outlines the code and prints the script at the end. This means that no matter what changes or what version of the script is being used, the exact process can be scrutinised.*
-
-###### Screenshot of some of the information generated in the txt stats report
-
-[![Screenshot of some of the information generated in the report](https://user-images.githubusercontent.com/118008765/230942324-d42d96da-8df4-4a87-8201-360852b2f662.png "xxx")](https://user-images.githubusercontent.com/118008765/230942324-d42d96da-8df4-4a87-8201-360852b2f662.png "xxx")
 
 This tool has been tested on English and Russian language search terms.
 
@@ -47,7 +35,7 @@ This tool has been tested on English and Russian language search terms.
 # Installation
 Clone the tg-keyword-trends repository by running the following command in your terminal or command prompt:
 
-``` git clone https://github.com/thomasjjj/tg-keyword-trends.git```
+``` git clone https://github.com/spmedia/tg-keyword-trends.git```
 
 Navigate into the tg-keyword-trends directory:
 
@@ -60,6 +48,7 @@ Install the required Python dependencies using pip:
 # Features
 - Graph adjusts scale to oldest and newest posts.
 - CSV generated for further processing.
+- JSON output
 - HTML file generated for opening links.
 - Generates report documenting the key details of the scrape (date, channels accessed, etc) for auditability of findings.
 - Media download
@@ -106,21 +95,3 @@ Install the required Python dependencies using pip:
 - tqdm~=4.65.0
 
 Python Version: Python 3.11 or higher
-
-# TODO
-
-------------
-
-- [ ] prevent opened graph png from disappearing
-- [ ] add error handling to user date inputs
-- [x] make graph production per term as well as aggregated to remove scaling issues
-- [x] insert all graphs into PDF report (separate from TXT file report)
-- [x] use the txt report to populate the PDF report with contextual data.
-- [ ] add asyncio options to optimise performance - particularly for media download.
-- [ ] better graphing, eg percent usage over time to adjust for new channels or surges in activity (ongoing improvements and new graphs - never complete this, just add more)
-- [ ] make sure the above is included in the report pdf
-- [x] time range selection
-- [ ] custom channel list
-- [ ] wordcloud generation of all matching messages to extract additional context, terms, and insights
-- [ ] set ability to group terms into single line on graph (e.g translations/transliterations)
-- [ ] possible feature: set default location for all downloaded media with a list file of media previously downloaded to prevent duplicate
