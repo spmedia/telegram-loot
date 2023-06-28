@@ -1,5 +1,8 @@
 # Telegram Loot
-An analysis tool to explore and monitor sus cybercrime channels/groups on the Telegram chat platform. Please use this tool with caution as it does not have content moderation or filtering. You are responsible for the content that may be exported.
+
+A fork of Telegram Trends by Tom Jarvis.
+
+This is an analysis tool to explore and monitor sus cybercrime channels/groups on the Telegram chat platform. Please use this tool with caution as it does not have content moderation or filtering. You are responsible for the content that may be exported.
 
 In short, this tool allows you to search all the channels you follow with a list of keywords/phrases and returns all matching results in various formats with graph visualisations. It also optionally downloads the media and thus can be used as a media search engine (currently some bugs with this feature - do not use as exhaustive media search tool).
 
