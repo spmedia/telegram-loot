@@ -25,24 +25,24 @@ from reportlab.lib.units import mm
 from reportlab.pdfgen import canvas
 from reportlab.platypus import Paragraph, Spacer, Image, PageBreak, Preformatted, PageTemplate, BaseDocTemplate, Frame
 from telethon.sync import TelegramClient
-
-# import stylecloud  # disabled while I fix the wordcloud
+from slack_sdk.webhook import WebhookClient
+from slack_sdk.errors import SlackApiError
+from slack_sdk import WebClient
 
 
 SCRIPT_DESCRIPTION = r"""
 
- _____    _                                  _____                  _     
-|_   _|  | |                                |_   _|                | |    
-  | | ___| | ___  __ _ _ __ __ _ _ __ ___     | |_ __ ___ _ __   __| |___ 
-  | |/ _ \ |/ _ \/ _` | '__/ _` | '_ ` _ \    | | '__/ _ \ '_ \ / _` / __|
-  | |  __/ |  __/ (_| | | | (_| | | | | | |   | | | |  __/ | | | (_| \__ \
-  \_/\___|_|\___|\__, |_|  \__,_|_| |_| |_|   \_/_|  \___|_| |_|\__,_|___/
-                  __/ |                                                   
-                 |___/                                                    
-By: Tom Jarvis ¦ Twitter: @tomtomjarvis
+ _____     _                                    __             _   
+/__   \___| | ___  __ _ _ __ __ _ _ __ ___     / /  ___   ___ | |_ 
+  / /\/ _ \ |/ _ \/ _` | '__/ _` | '_ ` _ \   / /  / _ \ / _ \| __|
+ / / |  __/ |  __/ (_| | | | (_| | | | | | | / /__| (_) | (_) | |_ 
+ \/   \___|_|\___|\__, |_|  \__,_|_| |_| |_| \____/\___/ \___/ \__|🧙‍♂️
+                  |___/                                                                                       
+A fork of Telegram Trends by Tom Jarvis ¦
 ---------------------------------------
-This script searches messages containing specified search terms in Telegram channels the user is a member of.
-It exports the search results in HTML and CSV formats, generates a report, and plots the message count per day."""
+This script searches messages containing specified search terms in sus cyber crime Telegram channels the user has joined.
+It exports the search results in HTML/JSON/CSV formats, generates a report, and plots the message count per day.
+The end results are sent to a Slack channel for monitoring"""
 
 SCRIPT_WARNING = r"""
 WARNING: This tool uses your list of followed groups as the list it searches from. It may include personal chats/groups.
@@ -400,13 +400,6 @@ def plot_keyword_frequency(all_results, dataframes_dict, output_folder, now):
         daily_message_count = all_messages.resample('D', on='date')['id'].agg(lambda x: x.max() - x.min() + 1)
         daily_message_count.name = 'total_messages'
         return daily_message_count
-
-    # Wordcloud generator -- -- Disabled for testing
-    '''
-    def generate_wordcloud_from_messages(messages, output_name):
-        all_messages = " ".join([msg.text for msg in messages])
-        stylecloud.gen_stylecloud(text=all_messages, output_name=output_name)
-    '''
 
     class NumberedCanvas(canvas.Canvas):
         def __init__(self, *args, **kwargs):
@@ -824,7 +817,7 @@ try:
         # Export to a JSON
         try:
             printC('Exporting to json...', Fore.YELLOW)
-            all_results.to_json(filename_json, orient='records', force_ascii=False)
+            all_results.to_json(filename_json, orient='records', indent=4, force_ascii=False)
             printC(f"Saved {filename_json}", Fore.GREEN)
         except IOError as e:
             print(f'Error making JSON: {e}')
@@ -864,3 +857,25 @@ except ValueError as e:
 
 printC('\nProcess completed', Fore.GREEN)
 client.disconnect()  # Disconnect the Telethon client from the Telegram server
+
+def upload_file_to_slack(file_path, slack_token):
+    client = WebClient(token=slack_token)
+
+    try:
+        response = client.files_upload_v2(
+            channels="Cxxxxxxxxxxxx",  # Replace with the desired channel on Slack you wanna post in
+            file=file_path,
+            initial_comment="Hits on keywords:" # lil txt to leave above the attached file
+        )
+        if response["ok"]:
+            print("File uploaded successfully to Slack!")
+        else:
+            print("Error uploading file to Slack. Error:", response["error"])
+    except SlackApiError as e:
+        print("Error uploading file to Slack:", e.response["error"])
+
+# Usage
+file_path = filename_json  # where teh path be
+slack_token = "xoxb-xxxxxxxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxx-xxxxxxxxxxxxxxxxx"  # Replace with your actual Slack token key thang
+
+upload_file_to_slack(file_path, slack_token)
