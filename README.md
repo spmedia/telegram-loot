@@ -6,6 +6,8 @@ This is an analysis tool to explore and monitor sus cybercrime channels/groups o
 
 In short, this tool allows you to search all the channels you follow with a list of keywords/phrases and returns all matching results in various formats with graph visualisations. It also optionally downloads the media and thus can be used as a media search engine (currently some bugs with this feature - do not use as exhaustive media search tool).
 
+I've just been modifying this for my own specific usage so sorry if it sucks. I think its a neat tool for CTI.
+
 ###### Screenshot of tool in action
 [put something here]
 
@@ -38,7 +40,7 @@ This tool has been tested on English and Russian language search terms.
 # Installation
 Clone the tg-keyword-trends repository by running the following command in your terminal or command prompt:
 
-``` git clone https://github.com/spmedia/tg-keyword-trends.git```
+```git clone https://github.com/spmedia/telegram-loot```
 
 Navigate into the tg-keyword-trends directory:
 
