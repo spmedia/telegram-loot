@@ -1,6 +1,6 @@
 # Telegram Loot
 
-tl;dr - this script is a Telegram wizard 🧙🏽‍♂️ that hunts for intel. It saves the alerts and uploads the file and an alert to a Slack channel.
+tl;dr - this script is a Telegram wizard 🧙🏽‍♂️ that hunts for intel. It saves the intel results and then uploads the results file + sends an alert to a Slack channel.
 
 A fork of Telegram Trends by Tom Jarvis.
 
