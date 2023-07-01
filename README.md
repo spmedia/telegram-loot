@@ -1,6 +1,6 @@
 # Telegram Loot
 
-tl;dr - this script is a Telegram wizard 🧙🏽‍♂️ that hunts for intel.
+tl;dr - this script is a Telegram wizard 🧙🏽‍♂️ that hunts for intel. It saves the alerts and uploads the file and an alert to a Slack channel.
 
 A fork of Telegram Trends by Tom Jarvis.
 
@@ -8,7 +8,7 @@ This is an analysis tool to explore and monitor sus cybercrime channels/groups o
 
 In short, this tool allows you to search all the channels you follow with a list of keywords/phrases and returns all matching results in various formats with graph visualisations. It also optionally downloads the media and thus can be used as a media search engine (currently some bugs with this feature - do not use as exhaustive media search tool).
 
-I've just been modifying this for my own specific usage so sorry if it sucks. I think its a neat tool for CTI.
+I've just been modifying this for my own specific usage so sorry if it sucks. I think its a neat tool for CTI. My code is 🍝 and bad so beware.
 
 ###### Screenshot of tool in action
 [![ss](https://i.imgur.com/xxEKkvl.png "Example result exploring hate speech during the Russian full-scale invasion of Ukraine")](https://i.imgur.com/xxEKkvl.png "asdffa")
